@@ -24,8 +24,11 @@
                             <th scope="row">{{ $album->id }}</th>
                             <td>{{ $album->name }}</td>
                             <td>
-                                <a href="{{ route('album.show', $album->id) }}">
+                                <a href="{{ route('album.details', $album->id) }}">
                                     <i class="bi bi-eye-fill"></i>
+                                </a>
+                                <a href="{{ route('album.show', $album->id) }}">
+                                    <i class="bi bi-patch-plus-fill"></i>
                                 </a>
                                 <a href="{{ route('album.edit', $album->id) }}">
                                     <i class="bi bi-pen"></i>

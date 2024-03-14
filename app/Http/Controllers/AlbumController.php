@@ -34,17 +34,6 @@ class AlbumController extends Controller
         $album = Album::create([
             'name'=>$request->name
         ]);
-        if ($request->hasFile('pictures')) {
-            $pictures=$request->file('pictures');
-            foreach ($pictures as $picture) {
-                $name=$picture->getClientOriginalName();
-                $picture->move($album->name,$name);
-                Picture::create([
-                    'album_id'=>$album->id,
-                    'name'=>$name
-                ]);
-            }
-        }
         return redirect()->route('album.index')->with(['success'=>'Album Created Successfully']);
 
     }
@@ -85,5 +74,9 @@ class AlbumController extends Controller
     {
         $album->delete();
         return redirect()->route('album.index')->with(['success'=>'Album Deleted Successfully']);
+    }
+    public function details(Album $album){
+        $pictures=$album->pictures;
+        return view('admin.album.album',compact('album','pictures'));
     }
 }

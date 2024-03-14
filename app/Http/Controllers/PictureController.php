@@ -29,7 +29,18 @@ class PictureController extends Controller
      */
     public function store(StorePictureRequest $request)
     {
-        //
+        if ($request->hasFile('pictures')) {
+            $pictures=$request->file('pictures');
+            foreach ($pictures as $picture) {
+                $name=$picture->getClientOriginalName();
+                $picture->move($request->album_name,$name);
+                Picture::create([
+                    'album_id'=>$request->album_id,
+                    'name'=>$name
+                ]);
+            }
+        }
+        return redirect()->route('album.index')->with(['success'=>'Pictures Created Successfully']);
     }
 
     /**

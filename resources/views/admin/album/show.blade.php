@@ -2,26 +2,26 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ $album->name }}</h5>
-            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    @foreach ($pictures as $index => $picture)
-                        <div class="carousel-item{{ $index === 0 ? ' active' : '' }}">
-                            <img src="{{ asset($album->name . '/' . $picture->name) }}" class="d-block w-100" height="500">
+            <h5 class="card-title">Album Name:- {{ $album->name }}</h5>
+            <form class="row g-3" action="{{route('picture.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="album_id" value="{{$album->id}}" >
+                <input type="hidden" name="album_name" value="{{ $album->name }}" >
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label">Add Picture</label>
+                    <input type="file" class="form-control" name="pictures[]" multiple>
+                    <br>
+                    @error('pictures')
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-octagon me-1"></i>
+                            {{ $message }}
                         </div>
-                    @endforeach
+                    @enderror
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection

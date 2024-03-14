@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Create Album</h5>
-            <form class="row g-3" action="{{ route('album.store') }}" method="POST" enctype="multipart/form-data">
+            <form class="row g-3" action="{{ route('album.store') }}" method="POST">
                 @csrf
                 <div class="col-12">
                     <label for="inputNanme4" class="form-label">Album Name</label>
@@ -15,10 +15,6 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
-                <div class="col-12">
-                    <label for="inputNanme4" class="form-label">Album Picture</label>
-                    <input type="file" class="form-control" name="pictures[]" multiple>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
