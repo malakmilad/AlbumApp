@@ -38,7 +38,7 @@ class AlbumController extends Controller
             $pictures=$request->file('pictures');
             foreach ($pictures as $picture) {
                 $name=$picture->getClientOriginalName();
-                $picture->move(Picture::PATH,$name);
+                $picture->move($album->name,$name);
                 Picture::create([
                     'album_id'=>$album->id,
                     'name'=>$name

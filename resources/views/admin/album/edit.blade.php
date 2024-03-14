@@ -22,7 +22,7 @@
                     <div class="d-flex justify-content-evently">
                         @foreach ($pictures as $picture)
                             <div class="mx-1">
-                                <img src="{{ asset('pictures/' . $picture->name) }}" width="100" height="100">
+                                <img src="{{ asset($album->name . '/' . $picture->name) }}" width="100" height="100">
                             </div>
                         @endforeach
                     </div>
